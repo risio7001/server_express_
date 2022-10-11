@@ -1,0 +1,13 @@
+{
+    "ribbonlist":"select Uid, DealerID, Text_Type, Text from T_MIM_TEXT_MANAGER where DealerID=@dealerId and Text_Type = @type",
+
+    "delribbon":"delete from T_MIM_MANAGER where Uid=@uid",
+
+    "insribbon":"insert into T_MIM_TEXT_MANAGER (DealerID, Text_Type, Text) values (@uid, @type, @text)",
+
+    "testribbonlist":"select Uid, DealerID, Text_Type, Text from TEST_MIM_TEXT_MANAGER where DealerID=@dealerId and Text_Type = @type",
+
+    "testinsribbon":"insert into TEST_MIM_TEXT_MANAGER (DealerID, Text_Type, Text) values (@uid, @type, @text)",
+
+    "testdelribbon":"delete from TEST_MIM_TEXT_MANAGER where Uid=@uid"
+}

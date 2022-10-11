@@ -1,0 +1,24 @@
+{
+
+    "cslist":"select * from T_QNA where SiteID=@siteId and UserID=@userid",
+    "csanswer":"select * from T_QNA_ANSWER where Uid=@uid",
+    "csCode":"select * from T_Config_CommonCode where SiteID='flda' and CmClass='CONSULT'",
+    "csMember":"SELECT DealerName, ChName, MI.Mobile, MI.Email, MI.Tel, MI.BizNo, Fax, BizFile, dealer_etcAdd1, MI.Post, MI.Addr, MI.AddrDetail, MI.AddrLat, MI.AddrLng, dealer_etcAdd2, dealer_etcAdd3, Bank, Account, Depositor, M.rec_member, dealer_etcAdd4, dealer_etcAdd5,IsNull(MM.Uid, 0) As MiUid FROM T_MIM_MEMBER MM JOIN T_MIM_INFO MI ON MM.Uid = MI.Uid JOIN T_MEMBER M ON MM.DealerID = M.UserID WHERE MM.SiteID = 'flda' AND MM.DealerID = @uid",
+    "csMemberModify":"",
+    "csMap":"SELECT addr_code, addr_name FROM T_DELIVERY_ADDR WHERE siteID = 'flda' AND dealerID = @uid ",
+
+    "TESTcsInsert":"INSERT INTO TEST_QNA (SiteID, PartnerID, Consult, Subject, UserID, Content, Email, IsReplyEmail, Mobile, IsReplySms,FILES) VALUES ('flda', 'flda', @consult, @subject, @userid, @content, @email, 'T', @mobile, 'T', null);",
+    "TESTcsUpdate":"UPDATE TEST_QNA SET Consult=@consult, Subject=@subject, Content=@content,Email=@email,IsReplyEmail='T',Mobile=@mobile,IsReplySms='T' WHERE SiteID='flda' AND UserID='flroad' AND Uid=@uid ",
+    "TESTcslist":"select * from TEST_QNA where SiteID=@siteId and UserID=@userid",
+    "TESTcsdel":"delete from TEST_QNA where Uid=@uid",
+    "TESTcsMap":"SELECT addr_code, addr_name FROM MEMBER_TEST_DELIVERY_ADDR WHERE siteID = 'flda' AND dealerID = @uid ",
+
+    "TESTcsMemberGet":"SELECT DealerName, ChName, MI.Mobile, MI.Email, MI.Tel, MI.BizNo, Fax, BizFile, dealer_etcAdd1, MI.Post, MI.Addr, MI.AddrDetail, MI.AddrLat, MI.AddrLng, dealer_etcAdd2, dealer_etcAdd3, Bank, Account, Depositor, M.rec_member, dealer_etcAdd4, dealer_etcAdd5,IsNull(MM.Uid, 0) As MiUid FROM MEMBER_TEST MM JOIN MEMBER_TEST_INFO MI ON MM.Uid = MI.Uid JOIN MEMBER_TEST_MEMBER M ON MM.DealerID = M.UserID WHERE MM.SiteID = 'flda' AND MM.DealerID = @uid",
+    "TESTcsMember":"select Uid, Pass from MEMBER_TEST where DealerID=@authId",
+    "TESTcsMemberMimModify":"update MEMBER_TEST set DealerName=@dealerName ,Pass=@pwd WHERE SiteID=@siteID AND Uid=@uid",
+    "TESTcsMemberInfoModify":"UPDATE MEMBER_TEST_INFO SET BizNo=@bizNo, Bank=@bank, Account=@account, Depositor=@depositor, ChName=@chName, Tel=@tel, Mobile=@mobile, Fax=@fax, Email=@emailId, Post=@post, Addr=@addr, AddrDetail=@addrDetail, AddrLat=@addrLat, AddrLng=@addrLng, BizFile='00', dealer_etcAdd2=@dealerEtc2, dealer_etcAdd5=@dealerEtc5 WHERE Uid=@uid",
+    "TESTcsMemberDeliverySelect":"select addr_code from MEMBER_TEST_DELIVERY_ADDR where siteID=@siteId and dealerID=@dealerId",
+    "TESTcsMemberDeliveryDelete":"delete from MEMBER_TEST_DELIVERY_ADDR where siteID=@siteId and dealerID=@dealerId and addr_code=@del_code",
+    "TESTcsMemberDeliveryInsert":"INSERT INTO MEMBER_TEST_DELIVERY_ADDR ( siteID, dealerID, addr_code, addr_name ) VALUES (@siteID, @id, @addr_code, @addr_name)"
+
+}

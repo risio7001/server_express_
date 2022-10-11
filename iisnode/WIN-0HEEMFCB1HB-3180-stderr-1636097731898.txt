@@ -1,0 +1,24 @@
+TypeError: Cannot read property 'request' of undefined
+    at module.exports (C:\test\sun\sql.js:32:17)
+    at Strategy._verify (C:\test\sun\session.js:20:12)
+    at Strategy.authenticate (C:\test\sun\node_modules\passport-local\lib\strategy.js:88:12)
+    at attempt (C:\test\sun\node_modules\passport\lib\middleware\authenticate.js:360:16)
+    at authenticate (C:\test\sun\node_modules\passport\lib\middleware\authenticate.js:361:7)
+    at Layer.handle [as handle_request] (C:\test\sun\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\test\sun\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\test\sun\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\test\sun\node_modules\express\lib\router\layer.js:95:5)
+    at C:\test\sun\node_modules\express\lib\router\index.js:281:22
+(node:3180) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+TypeError: Cannot read property 'request' of undefined
+    at module.exports (C:\test\sun\sql.js:32:17)
+    at Strategy._verify (C:\test\sun\session.js:20:12)
+    at Strategy.authenticate (C:\test\sun\node_modules\passport-local\lib\strategy.js:88:12)
+    at attempt (C:\test\sun\node_modules\passport\lib\middleware\authenticate.js:360:16)
+    at authenticate (C:\test\sun\node_modules\passport\lib\middleware\authenticate.js:361:7)
+    at Layer.handle [as handle_request] (C:\test\sun\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\test\sun\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\test\sun\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\test\sun\node_modules\express\lib\router\layer.js:95:5)
+    at C:\test\sun\node_modules\express\lib\router\index.js:281:22

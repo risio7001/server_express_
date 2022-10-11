@@ -1,0 +1,3 @@
+{
+    "cashInsertTry":"SET NOCOUNT ON;  INSERT INTO T_ORDERCASH_TRY ( SiteID, PersonUid, UserID, TotalOrderPrice, TotalOptionPrice, TotalDeliveryFee, TotalUserDiscountPrice, TotalEventDiscountPrice) VALUES (@SiteID, @PersonUid, @UserID, @TotalOrderPrice, @TotalOptionPrice, @TotalDeliveryFee, @TotalUserDiscountPrice, @TotalEventDiscountPrice);"
+}

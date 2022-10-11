@@ -1,0 +1,21 @@
+{
+    "order_check": "SELECT OrderNo, UserID, OrdMobile, State, partnerID FROM T_ORDER WHERE SiteID='flda' AND Uid=@uid",
+    
+    "orderinfo": "SELECT C.Uid, C.GoodsUid, C.CateCode, C.Ea, G.GoodsType, G.Title, G.SubTitle, G.ImgS, G.Price AS Cost, G.OriginalPrice, G.MarketPrice, G.Cmoney, G.Stock, G.DeliveryPolicy, G.DeliveryMethod, G.DeliveryFee, G.DeliveryLimit,G.staffprice, C.addOptUid, C.OptType, C.orderType, G.nChkOpt_useFlag, G.nChkOpt_type, G.nChkOPt_count, G.nChkStock_type, G.nChkMultiOpt_useFlag, G.nChkMultiOpt_EA, G.nChkMultiOpt_Price, G.nChkTextOpt_useFlag, G.nChkAddGoods_useFlag, P_IDX, C.setItems, C.setPrice, C.setItemCount, G.setTitleUid, G.smartGuid,G.EaType,G.IsBenifit,G.I_Reward,G.Reward,I_Reward_UserID, C.couponUid, G.officerPrice, G.appDiscountPrice,G.closingOrgPrice, ISNULL(G.IsClosing,'F') AS IsClosing,fldaAddress,fldaAddressBcode,fldaAddressLat,fldaAddressLng FROM T_CART AS C JOIN V_GOODS AS G ON C.SiteID=G.SiteID AND C.GoodsUid=G.Uid LEFT OUTER JOIN ( SELECT goodsUid AS WEGGoodsUid, siteID AS WEGsiteID, P_IDX, eg_idx FROM T_webpromotion_event_goods(nolock)) AS WEG ON WEGGoodsUid = G.Uid AND WEG.P_IDX = ( SELECT top 1 p_IDX FROM T_webpromotion_event WHERE SITEid = 'flda' AND CONVERT(VARCHAR(10), getdate(), 121) >= CONVERT(VARCHAR(10), p_sdate, 121) AND CONVERT(VARCHAR(10), getdate(), 121) <= CONVERT(VARCHAR(10), p_edate, 121) AND isUse = 'T' ORDER BY p_regdate DESC) WHERE C.SiteID='flda' AND C.PersonUid=@uid AND C.orderType = 'DIRECT' AND G.DealerID=@guid  AND G.IsDisplay='T' AND G.IsSoldOut='F' AND G.State=@state  ORDER BY C.RegDate ASC",
+    
+    "cart1": "DELETE FROM T_CART_OPTION WHERE CartUid IN (SELECT Uid FROM T_CART WHERE SiteID='flda' AND PersonUid=@puid AND orderType='DIRECT') ",
+    
+    "cart2": "DELETE FROM T_CART WHERE SiteID='flda' AND PersonUid=@puid AND orderType='DIRECT'",
+    
+    "cart3": "DELETE FROM T_CART WHERE SiteID='flda' AND UserID=@userid AND orderType='DIRECT'",
+    
+    "cart_insert": " SET NOCOUNT ON; INSERT INTO T_CART ( SiteID, UserID, PersonUid, GoodsUid, CateCode, Ea, addOptUid, OptType, orderType, I_Reward_UserID, couponUid, fldaAddress, fldaAddressBcode, fldaAddressLat, fldaAddressLng  ) VALUES ( 'flda',  @userid , @puid, @guid , @cate , @ea, 0 , 'none', 'DIRECT', NULL ,  NULL, @address, @bcode, @lat, @lng ); SELECT @@IDENTITY AS  idata  ",
+    
+    "t_order": "SELECT OrderNo, UserID, Payway, PayMethod, IsEscrow, TotalOrderPrice,TotalDeliveryFee, SettlePrice, OrgSettlePrice,OnlineBank, OnlineDepositor,TotalUserDiscountPrice, totalEventDiscountPrice, UserDiscount,UserDiscountUnit, UseCmoney, UseCash, TotalCouponDiscountPrice,      OrdName,OrdTel, OrdMobile, OrdEmail, OrdPost, OrdAddr, OrdAddrDetail, RcvName,RcvTel, RcvMobile, RcvPost, RcvAddr, RcvAddrDetail, OrderMemo,  State,IsRefunded, RegDate, isLoadFinishPage,MOUNTAINOUS_FEE , orderGoodsType , isSet, IsSimplePay, isRegularPay   FROM T_ORDER WHERE Uid = @uid ",
+    
+    "t_order_info": " SELECT Uid, OrderUid, DealerID, GoodsUid, CateCode, GoodsType, GoodsCode, GoodsTitle, GoodsImg, Price, OriginalPrice, MarketPrice, OptionPrice, Ea, OptionKind, OptionTxt, UserDiscountPrice, EventUid, EventDiscountPrice, IsDealerEvent, CouponUid, CouponDiscountPrice, AddCmoney, PartnerID, PartnerRate, Age, Sex, IsAgreeRefund, AgreeRefundDealerID, IsReceiptRefund, IsReceipt, state_OI, wpePidx, IsBulk, npayProductOrderID, IsAccountNotice, Tax_type, I_Reward, Reward, OI_e_XanaduStatus, OrderErpDATE, CancelErpDATE, I_Reward_UserID, subsidyUid, rMtype, rMuid, godoOrdno, CouponNaverUid, LinkOrderNo, PreUid, PreOrderUid, orgUrl, RecMemberAccountMonth, RecMemberAccountPercent, RecMemberAccount, RecMemberAccountDate, IsTalkRecAccount, RecMemberAccountConfirmDate FROM T_ORDER_INFO WHERE OrderUid = @uid",
+    
+    "order_dealer":"select tel,mobile,TM.uid FROM T_MIM_INFO AS TMI (nolock) INNER JOIN T_MIM_MEMBER AS TM(nolock) ON TMI.Uid=TM.Uid where TM.DealerID=@dealerId",
+
+    "order_photo": "SELECT img FROM T_ORDER_PHOTO WHERE OrderUid = @uid"
+}

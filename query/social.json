@@ -1,0 +1,3 @@
+{
+    "login": "SELECT Uid , UserID, Name , Mobile, Tel , Email FROM T_MEMBER WHERE (UserID=@user AND Pwd=@pass) OR ( social_google = @social_google) "
+}

@@ -1,0 +1,32 @@
+{
+    "myreviewcount": "SELECT COUNT(*) AS TotalCnt FROM T_GOODS_OPINION (NOLOCK) AS O LEFT JOIN T_GOODS_OPINION_ANSWER (NOLOCK) AS A ON O.Uid=A.OpinionUid LEFT JOIN T_ORDER_INFO (NOLOCK) AS TI ON TI.UID=O.OrderinfoUid LEFT OUTER JOIN T_ORDER (NOLOCK) AS OT ON OT.Uid=TI.OrderUid WHERE O.SiteID='flda' AND O.UserID=@userid",
+    
+    "myreviewlist": "SELECT * FROM (SELECT TOP (@listSize) * FROM (SELECT TOP (@start) O.Uid,O.UserID, Subject, O.Content, O.OrderinfoUid , O.ParPoint, CONVERT(VARCHAR,O.RegDate,23) AS RegDate , TI.GoodsTitle, A.DealerName, A.uid AS AUID,A.Content AS AContent, A.RegDate AS ARegDate,rcvaddr,rcvaddrdetail FROM T_GOODS_OPINION (NOLOCK) AS O LEFT JOIN T_GOODS_OPINION_ANSWER (NOLOCK) AS A ON O.Uid=A.OpinionUid LEFT JOIN T_ORDER_INFO (NOLOCK) AS TI ON TI.UID=O.OrderinfoUid LEFT OUTER JOIN T_ORDER (NOLOCK) AS OT ON OT.Uid=TI.OrderUid WHERE O.SiteID='flda' AND O.UserID=@userid ORDER BY O.Uid DESC) AS T1 ORDER BY Uid ASC) AS T2 ORDER BY Uid DESC",
+
+    "csreviewcount": "SELECT COUNT(*) AS TotalCnt FROM T_GOODS_OPINION AS O LEFT OUTER JOIN T_GOODS_OPINION_ANSWER AS A ON O.Uid=A.OpinionUid LEFT OUTER JOIN T_GOODS AS G ON O.GoodsUid=G.Uid LEFT JOIN T_ORDER_INFO (NOLOCK) AS TI ON TI.UID=O.OrderinfoUid LEFT OUTER JOIN T_ORDER (NOLOCK) AS OT ON OT.Uid=TI.OrderUid WHERE O.SiteID='flda' AND G.DealerID=@userid",
+    
+    "csreviewlist": "SELECT * FROM (SELECT TOP (@listSize) * FROM (SELECT TOP (@start) O.Uid,O.UserID, Subject, O.Content, O.OrderinfoUid , O.ParPoint, CONVERT(VARCHAR,O.RegDate,23) AS RegDate , G.Title, A.DealerName, A.uid AS AUID,A.Content AS AContent, A.RegDate AS ARegDate,rcvaddr,rcvaddrdetail FROM T_GOODS_OPINION AS O LEFT OUTER JOIN T_GOODS_OPINION_ANSWER AS A ON O.Uid=A.OpinionUid LEFT OUTER JOIN T_GOODS AS G ON O.GoodsUid=G.Uid LEFT JOIN T_ORDER_INFO (NOLOCK) AS TI ON TI.UID=O.OrderinfoUid LEFT OUTER JOIN T_ORDER (NOLOCK) AS OT ON OT.Uid=TI.OrderUid WHERE O.SiteID='flda' AND G.DealerID=@userid ORDER BY O.Uid DESC) AS T1 ORDER BY Uid ASC) AS T2 ORDER BY Uid DESC",
+
+    "review_exist": "SELECT OrderInfoUid FROM T_GOODS_OPINION WHERE OrderInfoUid =@infouid ",
+
+    "review_insert": " INSERT INTO T_GOODS_OPINION (SiteID, GoodsUid, CateCode, OrderInfoUid, UserID, UserName, Subject, Content, ParPoint, RegDate, files, MainDisplay, displayDate, nPayPurchaseReviewId, MainDisplayNor, displayDateNor) VALUES ('flda',  @guid, @cate, @infouid, @userid, @username, '-', @content  , @point , CONVERT(VARCHAR(10), getdate(), 21) , 'null', NULL, NULL, NULL, 'F', CONVERT(VARCHAR(10), getdate(), 21))",
+
+    "review_update": "UPDATE T_GOODS_OPINION SET CateCode = @cate , parPoint=@point ,  UserID = @userid , UserName = @username , Content = @content , RegDate = CONVERT(VARCHAR(23), getdate(), 121)  WHERE OrderInfoUid = @infouid ", 
+
+    "reviewdel1" : "DELETE FROM T_GOODS_OPINION_ANSWER WHERE OpinionUid=@uid",
+    
+    "reviewdel2" : "DELETE FROM T_GOODS_OPINION WHERE SiteID='flda' AND Uid=@uid",
+
+    "reviewload": "SELECT TOP 1 ParPoint,content,subject,files,orderInfoUid FROM T_GOODS_OPINION WHERE OrderInfoUid=13723 ORDER BY orderInfoUid DESC " ,
+
+    "reviewinserttest" : "INSERT INTO GOODS_TEST_OPTION (SiteID, GoodsUid, CateCode, OrderInfoUid, UserID, UserName, Subject, Content, ParPoint, RegDate, files, MainDisplay, displayDate, nPayPurchaseReviewId, MainDisplayNor, displayDateNor) VALUES ('flda',  @guid, @cate, @infouid, @userid, @username, '-', @content  , @point , CONVERT(VARCHAR(10), getdate(), 21) , 'null', NULL, NULL, NULL, 'F', CONVERT(VARCHAR(10), getdate(), 21))",
+
+    "reviewupdatetest": "UPDATE GOODS_TEST_OPTION SET CateCode = @cate , parPoint=@point ,  UserID = @userid , UserName = @username , Content = @content , RegDate = CONVERT(VARCHAR(23), getdate(), 121)  WHERE OrderInfoUid = @infouid ", 
+
+    "reviewexisttest": "SELECT OrderInfoUid FROM GOODS_TEST_OPTION WHERE OrderInfoUid =@infouid ",
+
+    "reviewdeltest" : "DELETE FROM GOODS_TEST_OPTION WHERE SiteID='flda' AND Uid=@uid",
+
+    "reviewinfo":"SELECT GoodsUid, CateCode FROM T_ORDER_INFO WHERE uid=@infouid"
+}
+
